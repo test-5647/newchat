@@ -1,92 +1,98 @@
 *{
     margin: 0;
-}
-
-.inp{
-
-display: flex;
-
-}
-
-.inp input{
-    padding: 10px;
-    flex: 1;
-}
-
-.inp button{
-    padding: 0 20px;
-}
-.body{
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
-
-.chat{
-    flex:1;
-    background-color: rgb(196, 196, 196);
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.me{
-    margin: 10px 10px;
-    display: inline-block;
-    align-self: flex-end;
-    background-color: rgb(255, 174, 0);
-    padding: 4px;
-    border-radius: 5px;
-}
-.sender{
-    margin: 10px 10px;
-    display: inline-block;
-    background-color: rgb(0, 255, 221);
-    padding: 4px;
-    border-radius: 5px;
-}
-
-.inp:not(.nott){
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-}
-
-.getid{
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 
-.getid input{
-    padding: 20px;
+.chat {
+  scroll-behavior: smooth;
 }
 
-
-.getid button{
-    background-color: orange;
-    color: white;
-    outline: none;
-    border: none;
-    padding: 10px 20px;
+.inp {
+  display: flex;
 }
 
-.flexxx{
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 100px);
+.inp input {
+  padding: 10px;
+  flex: 1;
 }
 
-.chat{
-    flex:1;
-    background-color: rgb(224, 224, 224);
+.inp button {
+  padding: 0 20px;
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  height: var(--ht);
 }
 
-.flexxx input{
-    padding: 20px;
+.chat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.me ,.sender{
+  margin: 6px 20px;
+  display: inline-block;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.me {
+  align-self: flex-end;
+  background-color: #B9F3E4;
+}
+.sender {
+  background-color: #E96479;
+  color: white;
+}
+
+.inp:not(.nott) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.getid {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.getid input {
+  padding: 20px;
+  border: 1px solid black;
+}
+
+.getid button {
+  background-color: orange;
+  color: white;
+  outline: none;
+  border: none;
+  padding: 10px 20px;
+}
+
+.flexxx {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.chat {
+  background-color: #4D455D;
+  flex-grow: 1;
+}
+
+.flexxx input {
+  padding: 15px;
+  border: none;
+  outline: none;
 }

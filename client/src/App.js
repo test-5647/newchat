@@ -7,6 +7,8 @@ let socket;
 const App = () => {
   const inpRef = useRef();
 
+  const [size, setSize] = useState();
+
   const [myId, setMyId] = useState();
   const [sendId, setSendId] = useState();
   const [auth, SetAuth] = useState(false);
@@ -14,23 +16,27 @@ const App = () => {
 
   const connect = () => {
     if (!myId) return;
-    disconnect();
-    socket = io("", { auth: { myId: myId } });
+    socket = io("/", { auth: { myId: myId } });
     socket.on("receive", (msg) => {
-      console.log(msg);
       setChat((prev) => [...prev, { class: "sender", data: msg.message }]);
     });
-    SetAuth(true)
+    SetAuth(true);
   };
 
-  const disconnect = () => {
-    if (socket) socket.disconnect();
-  };
+  useEffect(() => {
+    setSize(window.innerHeight + " , " + window.outerHeight);
+    document.documentElement.style.setProperty(
+      "--ht",
+      window.innerHeight + "px"
+    );
+  }, []);
 
   const handleSend = () => {
+    document.querySelector(".inppp").focus()
+
     if (!sendId) return;
-    if (!myId) return;
     if (!inpRef.current.value) return;
+
     setChat((prev) => [...prev, { class: "me", data: inpRef.current.value }]);
     socket.emit("send-message", {
       senderId: myId,
@@ -40,13 +46,20 @@ const App = () => {
   };
 
   useEffect(() => {
-    return () => {
-      if (socket) socket.disconnect();
-    };
-  }, []);
+    const chat = document.querySelector(".chat");
+    if (chat) {
+      chat.scrollTop = chat.scrollHeight;
+    }
+    if(inpRef.current)
+    inpRef.current.value = ""
+
+  }, [chat]);
 
   return (
     <div className="body">
+      <div className="width" style={{ position: "absolute" }}>
+        {size}
+      </div>
       {auth || (
         <div className="inp">
           <div className="getid">
@@ -63,6 +76,7 @@ const App = () => {
         <div className="flexxx">
           <div className="inp nott">
             <input
+
               placeholder="Send To"
               onChange={(e) => setSendId(e.target.value)}
               type="text"
@@ -78,7 +92,7 @@ const App = () => {
             })}
           </div>
           <div className="inp nott lastt">
-            <input placeholder="Type a message" ref={inpRef} type="text" />
+            <input className="inppp" placeholder="Type a message" ref={inpRef} type="text" />
             <button onClick={handleSend}>Send</button>
           </div>
         </div>
